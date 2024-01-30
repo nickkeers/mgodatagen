@@ -105,6 +105,10 @@ type Config struct {
 	Field string `json:"field"`
 	// For `countAggregator`, `boundAggregator` and `valueAggregator` only
 	Query bson.M `json:"query"`
+	// For `coordinates` only, the top left point of a bounding box representing the area to generate coordinates in the format [longitude, latitude]
+	LatLongTopLeft []float64 `json:"latLongTopLeft"`
+	// For `coordinates` only, the bottom right point of a bounding box representing the area to generate coordinates in the format [longitude, latitude]
+	LatLongBottomRight []float64 `json:"latLongBottomRight"`
 
 	// Deprecated. Use 'Min' instead
 	MinInt int32 `json:"minInt"`
@@ -554,7 +558,7 @@ func (ci *CollInfo) newGenerator(buffer *DocBuffer, key string, config *Config) 
 		return newDateGenerator(config, base, ci.pcg64)
 
 	case TypePosition, TypeCoordinates:
-		return newPositionGenerator(base, ci.pcg64)
+		return newPositionGenerator(base, ci.pcg64, config.LatLongTopLeft, config.LatLongBottomRight)
 
 	case TypeConstant:
 		return newConstantGenerator(base, config.ConstVal)

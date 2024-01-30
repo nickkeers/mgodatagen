@@ -474,15 +474,17 @@ Generates a random date (stored as [`ISODate`](https://docs.mongodb.com/manual/r
 
 ### Coordinates
 
-Generates random [GeoJSON](https://docs.mongodb.com/manual/geospatial-queries/#std-label-geospatial-geojson) coordinates (a GPS position in WGS84 Decimal Degrees with folowing format: `[ longitude, latitude ]` )
+Generates random [GeoJSON](https://docs.mongodb.com/manual/geospatial-queries/#std-label-geospatial-geojson) coordinates (a GPS position in WGS84 Decimal Degrees with following format: `[ longitude, latitude ]` )
 
 eg : [40.741895, -73.989308]
 
 ```scala
 "fieldName": {
-    "type":             "coordinates", // required
-    "nullPercentage":   <int>,         // optional
-    "maxDistinctValue": <int>          // optional
+    "type":               "coordinates",          // required
+    "nullPercentage":     <int>,                  // optional
+    "maxDistinctValue":   <int>,                  // optional
+    "latLongTopLeft":     [<float64>, <float64>], // optional, default: [-180, 90]
+    "latLongBottomRight": [<float64>, <float64>]  // optional, default: [180, -90]
 }
 ```
 
