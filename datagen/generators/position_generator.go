@@ -33,8 +33,8 @@ func validateCoordinates(topLeft, bottomRight []float64) bool {
 }
 
 func newPositionGenerator(base base, pcg64 *pcg.PCG64, topLeft, bottomRight []float64) (Generator, error) {
-	var defaultTopLeft = []float64{-180, 90}     // Min longitude, Max latitude (northwest top)
-	var defaultBottomRight = []float64{180, -90} // Max longitude, Min latitude (southeast bottom)
+	var defaultTopLeft = []float64{-180, 90}     // Min longitude, Max latitude (northwest corner)
+	var defaultBottomRight = []float64{180, -90} // Max longitude, Min latitude (southeast corner)
 
 	// Proceed with validation, relying on correct value order [longitude, latitude].
 	if topLeft == nil || bottomRight == nil || len(topLeft) != 2 || len(bottomRight) != 2 || !validateCoordinates(topLeft, bottomRight) {
